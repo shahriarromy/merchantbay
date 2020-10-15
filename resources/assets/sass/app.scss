@@ -25,7 +25,9 @@
 .value-color {
     border-bottom: 2px solid $green;
 }
-
+.navbar-nav {
+    flex-direction: inherit !important;
+}
 .boxWrap {
     display: flex;
     margin-bottom: 15px;

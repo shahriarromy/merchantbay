@@ -40,6 +40,7 @@
                         @else
                             @if (Auth::user()->user_type == 'admin')
                             <li class="nav-item"><a class="nav-link" href="/admin">Headings of Title</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/admin/rfq">RFQ</a></li>
                             @endif
                         @endguest
                     </ul>
@@ -100,6 +101,19 @@
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
+            $('.data-table-rfq').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('adminrfq.tables') }}",
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'rfq_name', name: 'rfq_name', orderable: false, searchable: true},
+                    {data: 'rfq_email', name: 'rfq_email', orderable: false, searchable: true},
+                    {data: 'rfq_company', name: 'rfq_company', orderable: false, searchable: true},
+                    {data: 'rfq_description', name: 'rfq_description', orderable: false, searchable: false},
+                    {data: 'view', name: 'view', orderable: false, searchable: false},
+                ]
+            });
             // $('.headings_image_ac').click(function () {
             //     alert('sd');
             // });
@@ -119,6 +133,26 @@
                     contentType: false,
                     processData: false
                 });
+            });
+        });
+        $(document).on('click', '.viewRFQsingle', function (e) {
+            e.preventDefault();
+            let token = $('meta[name="csrf-token"]').attr('content');
+            let id = $('.viewRFQsingle').attr('data-ids');
+            $.ajax({
+                url: '/adminrfqsingle',
+                type: 'POST',
+                data: {id: id, _token: token},
+                dataType: 'json',
+                cache: false,
+                success: function (data) {
+                    console.log(data);
+                    $('#rfqViewModal').modal('show');
+                    $('#rfq_name').html('romy');
+                    $('#rfq_email').html(data.rfq_email);
+                    $('#rfq_company').html(data.rfq_company);
+                    $('#rfq_description').html(data.rfq_description);
+                }
             });
         });
         function edit_image_modal(id){

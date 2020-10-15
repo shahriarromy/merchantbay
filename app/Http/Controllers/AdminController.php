@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Headings;
+use App\Rfq;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -35,6 +36,10 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
+    public function getRFQ(){
+        return view('admin.rfq');
+    }
+
     public function tables(Request $request)
     {
         if ($request->ajax()) {
@@ -54,6 +59,30 @@ class AdminController extends Controller
                 })
                 ->rawColumns(['action', 'headings_image'])
                 ->make(true);
+        }
+    }
+
+    public function rfqTables(Request $request){
+        if ($request->ajax()) {
+            $rfq = Rfq::latest()->get();
+            return Datatables::of($rfq)
+                ->addIndexColumn()
+                ->addColumn('rfq_description', function ($row) {
+                    if (!empty($row->rfq_description)) {
+                        return str_limit($row->rfq_description, 100, '...');
+                    }
+                })
+                ->addColumn('view', function ($row) {
+                    return '<a href="javascript:void(0)" class="btn btn-primary btn-sm viewRFQsingle" data-ids="' . $row->id . '">view</a>';
+                })
+                ->rawColumns(['view'])
+                ->make(true);
+        }
+    }
+    public function rfqSingle(Request $request){
+        if ($request->ajax()) {
+            $rfqSingle = Rfq::where('id',$request->id)->firstOrfail();
+            echo json_encode($rfqSingle);
         }
     }
 

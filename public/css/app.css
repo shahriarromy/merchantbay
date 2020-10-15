@@ -11304,6 +11304,10 @@ a.text-dark:focus {
   border-bottom: 2px solid #55A860;
 }
 
+.navbar-nav {
+  flex-direction: inherit !important;
+}
+
 .boxWrap {
   display: flex;
   margin-bottom: 15px;

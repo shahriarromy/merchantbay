@@ -239,12 +239,6 @@ class AjaxController extends Controller
             'rfq_company' => 'required',
             'rfq_description' => 'required',
         ]);
-//        $this->validate($request, [
-//            'rfq_name' => 'required|max:255',
-//            'rfq_email' => 'required|email',
-//            'rfq_company' => 'required',
-//            'rfq_description' => 'required',
-//        ]);
         if ($v->fails())
         {
             return redirect()->back()->withErrors($v->errors());
