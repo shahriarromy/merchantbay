@@ -13,56 +13,87 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <h5 class="color-green fs-18 mb10">Headings ID: <span
+                <h5 class="color-green fs-18 mb10">Heading ID: <span
                         class="badge badge-success fs-18">{{$headings->id}}</span></h5>
-                <h5 class="color-green fs-18 mb10">Headings Title: <span
+                <h5 class="color-green fs-18 mb10">Heading Title: <span
                         class="value-color">{{$headings->headings_title}}</span></h5>
-                <h5 class="color-green fs-18 mb10">Headings chapter: <span
+                <h5 class="color-green fs-18 mb10">Heading chapter: <span
                         class="value-color">{{$headings->hs_category['chapter']}}</span></h5>
-                <h5 class="color-green fs-18">Headings Section: <span
+                <h5 class="color-green fs-18 mb10">Heading Section: <span
                         class="value-color">{{$headings->hs_category['section']}}</span></h5>
+                <h5 class="color-green fs-18 mb10">Exported to: <span
+                        class="value-color">{{$country_count}} Countries <em>(FY {{array_key_first($usd)}} to FY {{array_key_last($usd)}})</em></span></h5>
+                <h5 class="color-green fs-18">Export value earned: <span
+                        class="value-color"><strong>&#36;{{$totalUSD['amount']}}</strong> {{$totalUSD['currencyFormat']}} <em>(FY {{array_key_first($usd)}} to FY {{array_key_last($usd)}})</em></span></h5>
             </div>
         </div>
 
         @if(!empty($usd))
-        <div class="chartOuter">
-            <div class="row chart_before">
-                <div class="col-md-10">
-                    <div class="country count">
-                        This product is exported to {{$country_count}} Countries since FY {{array_key_first($usd)}}<br>
-                        <small>Value of export since FY {{array_key_first($usd)}} is <strong>&#36;{{$totalUSD['amount']}}</strong> {{$totalUSD['currencyFormat']}} dollars</small>
+            <div class="chartOuter">
+                <div class="row chart_before">
+                    <div class="col-md-12">
+                        <div class="country count">
+                            <label for="">See the fiscal year-wise export scenario: Bangladesh to </label>
+                            <select class="form-control m-bot15" id="changeCountry" onchange="myFunction()">
+                                <option value="0">All Countries</option>
+                                @foreach($country as $val)
+                                    <option value="{{$val['id']}}">{{$val['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="inputBox">
-                        <select class="form-control m-bot15" id="changeCountry" onchange="myFunction()">
-                            <option value="0">All Countries</option>
-                            @foreach($country as $val)
-                                <option value="{{$val['id']}}">{{$val['name']}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                <div class="row">
+                    <dov class="col">
+                        <div id="abc" style="height: 100%; width: 100%;">
+                            {{--                        {!! $chart->render() !!}--}}
+                        </div>
+                    </dov>
                 </div>
             </div>
-            <div class="row">
-                <dov class="col">
-
-                    <div id="abc" style="height: 100%; width: 100%;">
-{{--                        {!! $chart->render() !!}--}}
-                    </div>
-                </dov>
-            </div>
-        </div>
         @endif
 
         <div class="row">
-            <div class="col-12"><div class="source_title">You can source this product from these factories</div></div>
-        </div>
-        <div id="suppliers">
+            <div class="col-md-12">
+                <form action="{{url('post-rfq')}}" method="post"><br><br>
+                    @csrf
+                    <div class="aligncenter"><button class="btn-green btn-big">Send RFQ</button></div>
+                    <br>
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            {!! implode('', $errors->all('<div>:message</div>')) !!}
+                        </div>
+                    @endif
+
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    <h5>Ask for Merchant Assistant</h5><br>
+                    <div class="input-group">
+                        <label for="rfq_name">Name: </label>
+                        &nbsp;&nbsp;<input type="text" name="rfq_name" class="">
+                    </div>
+                    <div class="input-group">
+                        <label for="rfq_email">E-mail: </label>
+                        &nbsp;&nbsp;<input type="text" name="rfq_email" class="">
+                    </div>
+                    <div class="input-group">
+                        <label for="rfq_company">Company name</label>
+                        &nbsp;&nbsp;<input type="text" name="rfq_company" class="">
+                    </div>
+                    <div class="input-group">
+                        <label for="rfq_name">Describe what you looking for</label><br>
+                        <textarea name="rfq_description" class="form-control" rows="8"></textarea>
+                    </div>
+                </form>
+            </div>
+
         </div>
 
         <script>
-            load_data();
+            //load_data();
             myFunction()
             function apply_changes(response) {
                 $(function () {

@@ -19,7 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://www.merchantbay.com/css/frontend.all.css" rel="stylesheet" type="text/css">
+    <link href="https://www.merchantbay.com/public/css/frontend.all.min.css" rel="stylesheet" type="text/css">
 {{--    {!! Charts::assets() !!}--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.10.1/chartist.min.css">
 

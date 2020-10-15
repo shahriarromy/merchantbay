@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Exports;
 use App\Headings;
+use App\Rfq;
 use App\Suppliers;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -228,6 +230,32 @@ class AjaxController extends Controller
                             </div>';
             }
             echo $output;
+        }
+    }
+    function postData(Request $request){
+        $v = Validator::make($request->all(), [
+            'rfq_name' => 'required|max:255',
+            'rfq_email' => 'required|email',
+            'rfq_company' => 'required',
+            'rfq_description' => 'required',
+        ]);
+//        $this->validate($request, [
+//            'rfq_name' => 'required|max:255',
+//            'rfq_email' => 'required|email',
+//            'rfq_company' => 'required',
+//            'rfq_description' => 'required',
+//        ]);
+        if ($v->fails())
+        {
+            return redirect()->back()->withErrors($v->errors());
+        }
+        $rfq = new Rfq;
+        $rfq->rfq_name = $request->rfq_name;
+        $rfq->rfq_email = $request->rfq_email;
+        $rfq->rfq_company = $request->rfq_company;
+        $rfq->rfq_description = $request->rfq_description;
+        if($rfq->save()) {
+            return redirect()->back()->with('success', 'RFQ added successfully');
         }
     }
 }

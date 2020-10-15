@@ -11284,6 +11284,10 @@ a.text-dark:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.aligncenter {
+  text-align: center;
+}
+
 .mb5 {
   margin-bottom: 5px;
 }
@@ -11427,5 +11431,23 @@ a.text-dark:focus {
   width: 100% !important;
   position: unset;
   margin-left: 0;
+}
+
+.chartOuter .country.count {
+  text-align: center;
+}
+
+.chartOuter .country label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.chartOuter .country .form-control {
+  width: auto !important;
+  display: inline !important;
+}
+
+.btn-big {
+  font-size: 30px !important;
 }
 

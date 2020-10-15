@@ -25,5 +25,6 @@ Route::get('/heading_desc/{id}', 'HeadingsController@index')->name('heading_desc
 Route::post('/ajaxchart', 'AjaxController@chartcountry');
 Route::post('/ajaxchartinit', 'AjaxController@ajaxchartinit');
 Route::post('/loadmore', 'AjaxController@ajaxloadmore');
+Route::post('/post-rfq', 'AjaxController@postData');
 
 
