@@ -44,18 +44,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <dov class="col">
+                    <div class="col">
                         <div id="abc" style="height: 100%; width: 100%;">
                             {{--                        {!! $chart->render() !!}--}}
                         </div>
-                    </dov>
+                    </div>
                 </div>
             </div>
         @endif
 
         <div class="row">
             <div class="col-md-12">
-                <form action="{{url('post-rfq')}}" method="post"><br><br>
+                <form action="{{url('post-rfq')}}" method="post" class="form-horizontal"><br><br>
                     @csrf
                     <div class="aligncenter"><button class="btn-green btn-big">Send RFQ</button></div>
                     <br>
@@ -70,22 +70,30 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <h5>Ask for Merchant Assistant</h5><br>
-                    <div class="input-group">
-                        <label for="rfq_name">Name: </label>
-                        &nbsp;&nbsp;<input type="text" name="rfq_name" class="">
+                    <h4>Ask for Merchant Assistant</h4><br>
+                    <div class="form-group">
+                        <label for="rfq_name" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="rfq_name" name="rfq_name" placeholder="Name" required>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label for="rfq_email">E-mail: </label>
-                        &nbsp;&nbsp;<input type="text" name="rfq_email" class="">
+                    <div class="form-group">
+                        <label for="rfq_email" class="col-sm-2 control-label">E-mail</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="rfq_email" name="rfq_email" placeholder="E-mail" required>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label for="rfq_company">Company name</label>
-                        &nbsp;&nbsp;<input type="text" name="rfq_company" class="">
+                    <div class="form-group">
+                        <label for="rfq_company" class="col-sm-2 control-label">Company name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="rfq_company" name="rfq_company" placeholder="Company name" required>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label for="rfq_name">Describe what you looking for</label><br>
-                        <textarea name="rfq_description" class="form-control" rows="8"></textarea>
+                    <div class="form-group">
+                        <label for="rfq_description" class="col-sm-2 control-label">Describe what you looking for</label>
+                        <div class="col-sm-10">
+                            <textarea name="rfq_description" class="form-control" rows="8" required placeholder="Describe what you looking for"></textarea>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -134,7 +142,7 @@
                         },
                         legend: {},
                         series: [{
-                            name: "Export",
+                            name: "Export data for heading {{$headings->id}}",
                             data: response.value
                         }]
                     });
