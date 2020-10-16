@@ -138,7 +138,7 @@
         $(document).on('click', '.viewRFQsingle', function (e) {
             e.preventDefault();
             let token = $('meta[name="csrf-token"]').attr('content');
-            let id = $('.viewRFQsingle').attr('data-ids');
+            let id = $(this).attr('data-ids');
             $.ajax({
                 url: '/adminrfqsingle',
                 type: 'POST',
@@ -148,7 +148,7 @@
                 success: function (data) {
                     console.log(data);
                     $('#rfqViewModal').modal('show');
-                    $('#rfq_name').html('romy');
+                    $('#rfq_name').html(data.rfq_name);
                     $('#rfq_email').html(data.rfq_email);
                     $('#rfq_company').html(data.rfq_company);
                     $('#rfq_description').html(data.rfq_description);

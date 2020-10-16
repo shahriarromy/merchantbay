@@ -17,7 +17,7 @@
                         class="badge badge-success fs-18">{{$headings->id}}</span></h5>
                 <h5 class="color-green fs-18 mb10">Heading Title: <span
                         class="value-color">{{$headings->headings_title}}</span></h5>
-                <h5 class="color-green fs-18 mb10">Heading chapter: <span
+                <h5 class="color-green fs-18 mb10">Heading Chapter: <span
                         class="value-color">{{$headings->hs_category['chapter']}}</span></h5>
                 <h5 class="color-green fs-18 mb10">Heading Section: <span
                         class="value-color">{{$headings->hs_category['section']}}</span></h5>
@@ -70,7 +70,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <h4>Ask for Merchant Assistant</h4><br>
+                    <h4>Ask for Merchant Assistance</h4><br>
                     <div class="form-group">
                         <label for="rfq_name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-10">
