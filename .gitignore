@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /ftp
+/resources/views/headings.blade_bak_with_supply.php
 /vendor
 /.idea
 /.vscode
