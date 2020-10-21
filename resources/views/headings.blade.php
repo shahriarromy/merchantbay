@@ -13,18 +13,18 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <h5 class="color-green fs-18 mb10">Heading ID: <span
+                <h5 class="color-green fs-18 mb10 fwb">Heading ID: <span
                         class="badge badge-success fs-18">{{$headings->id}}</span></h5>
-                <h5 class="color-green fs-18 mb10">Heading Title: <span
-                        class="value-color">{{$headings->headings_title}}</span></h5>
-                <h5 class="color-green fs-18 mb10">Heading Chapter: <span
-                        class="value-color">{{$headings->hs_category['chapter']}}</span></h5>
-                <h5 class="color-green fs-18 mb10">Heading Section: <span
-                        class="value-color">{{$headings->hs_category['section']}}</span></h5>
-                <h5 class="color-green fs-18 mb10">Exported to: <span
-                        class="value-color">{{$country_count}} Countries <em>(FY {{array_key_first($usd)}} to FY {{array_key_last($usd)}})</em></span></h5>
-                <h5 class="color-green fs-18">Export value earned: <span
-                        class="value-color"><strong>&#36;{{$totalUSD['amount']}}</strong> {{$totalUSD['currencyFormat']}} <em>(FY {{array_key_first($usd)}} to FY {{array_key_last($usd)}})</em></span></h5>
+                <h5 class="color-green fs-18 mb10 fwb">Heading Title: <span
+                        class="font-weight-normal">{{$headings->headings_title}}</span></h5>
+                <h5 class="color-green fs-18 mb10 fwb">Heading Chapter: <span
+                        class="font-weight-normal">{{$headings->hs_category['chapter']}}</span></h5>
+                <h5 class="color-green fs-18 mb10 fwb">Heading Section: <span
+                        class="font-weight-normal">{{$headings->hs_category['section']}}</span></h5>
+                <h5 class="color-green fs-18 mb10 fwb">Exported to: <span
+                        class="font-weight-normal">{{$country_count}} Countries <span class="fs-11">(FY {{array_key_first($usd)}} to FY {{array_key_last($usd)}})</span></span></h5>
+                <h5 class="color-green fs-18 fwb">Export value earned: <span
+                        class="font-weight-normal"><strong>&#36;{{$totalUSD['amount']}}</strong> {{$totalUSD['currencyFormat']}} <span class="fs-11">(FY {{array_key_first($usd)}} to FY {{array_key_last($usd)}})</span></span></h5>
             </div>
         </div>
 
@@ -52,13 +52,15 @@
                 </div>
             </div>
         @endif
-
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aligncenter"><button class="btn-green btn-big" onclick="window.open('https://www.merchantbay.com/create-rfq')">Send RFQ</button></div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <form action="{{url('post-rfq')}}" method="post" class="form-horizontal"><br><br>
                     @csrf
-                    <div class="aligncenter"><button class="btn-green btn-big">Send RFQ</button></div>
-                    <br>
                     @if($errors->any())
                         <div class="alert alert-danger">
                             {!! implode('', $errors->all('<div>:message</div>')) !!}
@@ -95,6 +97,7 @@
                             <textarea name="rfq_description" class="form-control" rows="8" required placeholder="Describe what you looking for"></textarea>
                         </div>
                     </div>
+                    <div class="aligncenter"><button class="btn-green btn-big">SUBMIT</button></div>
                 </form>
             </div>
 
